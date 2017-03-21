@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlexGroup - Sitemap Scanner</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/scripts")
+    @Scripts.Render("~/bundles/bootstrap")
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1 text-center">
+                <div class="form-group">
+                    <label for="url">Enter URL:</label>
+                    <input id="url" type="text" class="form-control center-block" data-bind="value: urlAddress, valueUpdate: 'afterkeydown'">
+                    <div type="text" class="center-block" data-bind="text: urlResponse"></div>
+                </div>
+            </div>
+        </div>
+        <div data-bind="kendoChart: { data: urlList, series: [{ name: 'Response time', field: 'testTime' }] }"> </div>
+        <div class="row" data-bind="visible: urlList().length > 0">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Sitemap addresses:</th>
+                        <th>Time response:</th>
+                        <th>Test status:</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: urlList">
+                    <tr>
+                        <td data-bind="text: url"></td>
+                        <td data-bind="text: testTime"></td>
+                        <td data-bind="text: testResponse"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="container text-center">
+        <hr />
+        <footer>
+            <p>FlexGroup - Sitemap Scanner</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/scanner")
+</body>
+</html>
